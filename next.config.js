@@ -7,6 +7,9 @@ const nextConfig = {
 module.exports = {
   reactStrictMode: true,
   images: {
-    domains: ["images.pexels.com"],
+    domains: [
+      "images.pexels.com",
+      "bayut-production.s3.eu-central-1.amazonaws.com",
+    ],
   },
 };

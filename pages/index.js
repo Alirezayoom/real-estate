@@ -37,10 +37,8 @@ const Banner = ({
 );
 
 export default function Home({ propertiesForSale, propertiesForRent }) {
-  console.log(propertiesForRent, propertiesForSale);
   return (
     <div>
-      <h1>Hello World!</h1>
       <Banner
         purpose="RENT A HOME"
         title1="Rental Homes for"
@@ -51,10 +49,11 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
         linkName="/search?purpose=for-rent"
         imageUrl="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      {/* fetch the properties and map over them */}
-      {propertiesForRent.map((property) => (
-        <Property property={property} key={property.id} />
-      ))}
+      <Flex flexWrap="wrap">
+        {propertiesForRent.map((property) => (
+          <Property property={property} key={property.id} />
+        ))}
+      </Flex>
       <Banner
         purpose="BUY A HOME"
         title1="Find, Buy and Own Your"
@@ -65,10 +64,11 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
         linkName="/search?purpose=for-sale"
         imageUrl="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
-      {/* fetch the properties and map over them */}
-      {propertiesForSale.map((property) => (
-        <Property property={property} key={property.id} />
-      ))}
+      <Flex flexWrap="wrap">
+        {propertiesForSale.map((property) => (
+          <Property property={property} key={property.id} />
+        ))}
+      </Flex>
     </div>
   );
 }
