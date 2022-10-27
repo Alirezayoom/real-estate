@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
+import Property from "../components/Property";
 
 import { baseUrl, fetchApi } from "../utils/fetchApi";
 
@@ -51,6 +52,9 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
         imageUrl="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
       {/* fetch the properties and map over them */}
+      {propertiesForRent.map((property) => (
+        <Property property={property} key={property.id} />
+      ))}
       <Banner
         purpose="BUY A HOME"
         title1="Find, Buy and Own Your"
@@ -62,6 +66,9 @@ export default function Home({ propertiesForSale, propertiesForRent }) {
         imageUrl="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
       {/* fetch the properties and map over them */}
+      {propertiesForSale.map((property) => (
+        <Property property={property} key={property.id} />
+      ))}
     </div>
   );
 }
