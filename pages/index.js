@@ -2,6 +2,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { Flex, Box, Text, Button } from "@chakra-ui/react";
 
+import { baseUrl, fetchApi } from "../utils/fetchApi";
+
 const Banner = ({
   purpose,
   imageUrl,
@@ -33,7 +35,8 @@ const Banner = ({
   </Flex>
 );
 
-export default function Home() {
+export default function Home({ propertiesForSale, propertiesForRent }) {
+  console.log(propertiesForRent, propertiesForSale);
   return (
     <div>
       <h1>Hello World!</h1>
@@ -47,6 +50,7 @@ export default function Home() {
         linkName="/search?purpose=for-rent"
         imageUrl="https://images.pexels.com/photos/1457842/pexels-photo-1457842.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
+      {/* fetch the properties and map over them */}
       <Banner
         purpose="BUY A HOME"
         title1="Find, Buy and Own Your"
@@ -57,6 +61,23 @@ export default function Home() {
         linkName="/search?purpose=for-sale"
         imageUrl="https://images.pexels.com/photos/1643383/pexels-photo-1643383.jpeg?auto=compress&cs=tinysrgb&w=600"
       />
+      {/* fetch the properties and map over them */}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const propertyForSale = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-sale&hitsPerPage=6`
+  );
+  const propertyForRent = await fetchApi(
+    `${baseUrl}/properties/list?locationExternalIDs=5002&purpose=for-rent&hitsPerPage=6`
+  );
+
+  return {
+    props: {
+      propertiesForSale: propertyForSale?.hits,
+      propertiesForRent: propertyForRent?.hits,
+    },
+  };
 }
